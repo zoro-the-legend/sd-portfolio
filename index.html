@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suraj Dole · Cloud &amp; DevOps Engineer</title>
+<meta name="description" content="AWS Certified Solutions Architect with 5+ years in Kubernetes, Terraform, GitOps and AI/ML platform infrastructure.">
+<style>
+:root{
+  --bg:#0b1020; --panel:#121933; --panel2:#171f3f; --text:#e8ecf8; --muted:#9aa5c7;
+  --line:#26305a; --accent:#4cc9f0; --accent2:#7c5cff; --ok:#3ddc97;
+  --svg-box:#171f3f; --svg-stroke:#4a5aa0;
+}
+:root[data-theme="light"]{
+  --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef1fa; --text:#12172b; --muted:#566086;
+  --line:#dde2f2; --accent:#0b7bc1; --accent2:#5b3fe0; --ok:#12915f;
+  --svg-box:#eef1fa; --svg-stroke:#8b97c9;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef1fa; --text:#12172b; --muted:#566086;
+    --line:#dde2f2; --accent:#0b7bc1; --accent2:#5b3fe0; --ok:#12915f;
+    --svg-box:#eef1fa; --svg-stroke:#8b97c9;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+nav .brand{font-weight:700;letter-spacing:.3px;color:var(--text)}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+nav ul a{color:var(--muted);font-size:14px}
+nav ul a:hover{color:var(--text);text-decoration:none}
+#theme{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 10px;cursor:pointer}
+@media(max-width:640px){nav ul li.hide-sm{display:none}}
+.hero{padding:88px 0 56px}
+.tag{display:inline-block;font:13px ui-monospace,Menlo,monospace;color:var(--accent);border:1px solid var(--line);background:var(--panel);padding:4px 10px;border-radius:99px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.1;margin:18px 0 12px}
+h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:720px;color:var(--muted);font-size:18px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-weight:600}
+.btn.primary{background:linear-gradient(90deg,var(--accent2),var(--accent));border:0;color:#fff}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:8px 0 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.stat b{display:block;font-size:30px;color:var(--accent)}
+.stat span{color:var(--muted);font-size:14px}
+section{padding:60px 0}
+h2{font-size:28px;margin:0 0 6px}
+h2 small{display:block;font:13px ui-monospace,Menlo,monospace;color:var(--accent);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase}
+.sub{color:var(--muted);margin:0 0 28px}
+.timeline{border-left:2px solid var(--line);margin-left:6px}
+.job{position:relative;padding:0 0 30px 26px}
+.job::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.job h3{margin:0;font-size:19px}
+.job .meta{color:var(--muted);font-size:14px;margin-bottom:8px}
+.job ul{margin:0;padding-left:18px;color:var(--muted)}
+.job li{margin:4px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:26px}
+.card h3{margin:0 0 4px;font-size:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.chip{font:12.5px ui-monospace,Menlo,monospace;background:var(--panel2);border:1px solid var(--line);padding:3px 10px;border-radius:99px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:16px 0}
+.cols h4{margin:0 0 4px;color:var(--text);font-size:14px;text-transform:uppercase;letter-spacing:.8px}
+.cols p,.cols ul{margin:0;color:var(--muted);font-size:15px;padding-left:0;list-style:none}
+.cols li{margin:3px 0}
+.diagram{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;overflow-x:auto;margin-top:14px}
+.diagram svg{display:block;min-width:760px;width:100%;height:auto}
+.diagram figcaption{font-size:13px;color:var(--muted);padding:8px 4px 0}
+figure{margin:0}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.skill{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.skill h4{margin:0 0 10px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14px}
+.contact{text-align:center}
+/* svg theming */
+.nb{fill:var(--svg-box);stroke:var(--svg-stroke);stroke-width:1.3}
+.nb.hl{stroke:var(--accent);stroke-width:2}
+.nb.ac{stroke:var(--accent2);stroke-width:2}
+.zone{fill:none;stroke:var(--svg-stroke);stroke-dasharray:6 5;stroke-width:1.2}
+.t{fill:var(--text);font:600 13px system-ui,sans-serif}
+.ts{fill:var(--muted);font:11.5px system-ui,sans-serif}
+.tz{fill:var(--accent);font:600 11px ui-monospace,Menlo,monospace;letter-spacing:.8px}
+.ln{stroke:var(--accent);stroke-width:1.6;fill:none}
+.ln2{stroke:var(--accent2);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+.ar{fill:var(--accent)}
+.ar2{fill:var(--accent2)}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top">SD<span style="color:var(--accent)">.</span></a>
+  <ul>
+    <li class="hide-sm"><a href="#experience">Experience</a></li>
+    <li class="hide-sm"><a href="#projects">Projects</a></li>
+    <li class="hide-sm"><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button id="theme" aria-label="Toggle theme">◐</button></li>
+  </ul>
+</div></nav>
+
+<main id="top">
+<header class="hero"><div class="wrap">
+  <span class="tag">AWS Certified Solutions Architect · Pune, India</span>
+  <h1>Hi, I'm Suraj Dole.<br><span>I build cloud platforms that don't fall over.</span></h1>
+  <p class="lead">Cloud &amp; DevOps engineer with 5+ years designing highly available AWS infrastructure, Kubernetes microservices, Terraform IaC and GitOps delivery, most recently for AI/ML platforms.</p>
+  <div class="cta">
+    <a class="btn primary" href="#contact">Get in touch</a>
+    <a class="btn" href="#projects">See architectures</a>
+    <a class="btn" href="https://www.linkedin.com/in/suraj-dole-b40b8518b" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <div class="stats" style="margin-top:44px">
+    <div class="stat"><b>5+ yrs</b><span>DevOps &amp; cloud infrastructure</span></div>
+    <div class="stat"><b>−40%</b><span>incident resolution time via observability</span></div>
+    <div class="stat"><b>−50%</b><span>deployment effort via Jenkins + ArgoCD</span></div>
+    <div class="stat"><b>4</b><span>Kubernetes clusters running one platform</span></div>
+  </div>
+</div></header>
+
+<section id="experience"><div class="wrap">
+  <h2><small>Career</small>Experience</h2>
+  <p class="sub">Outcome-focused highlights from my last three roles.</p>
+  <div class="timeline">
+    <div class="job">
+      <h3>Sr. Associate Infrastructure Engineer · Publicis Sapient</h3>
+      <div class="meta">May 2025 – Present · Pune, India</div>
+      <ul>
+        <li>Architected multi-AZ AWS infrastructure (VPC, EKS, ALB/NLB, Route 53) for high availability and fault tolerance.</li>
+        <li>Implemented IAM roles and IRSA for least-privilege workload access, eliminating hardcoded credentials.</li>
+        <li>Designed GitOps delivery with ArgoCD + Argo Image Updater across dev/demo/prod.</li>
+        <li>Built GitLab CI with SAST, multi-stage Docker builds and ECR/ACR publishing.</li>
+        <li>Cut incident resolution time by 40% with Prometheus, Grafana and CloudWatch dashboards and alerting.</li>
+        <li>Tuned HPA, requests/limits, taints, tolerations and node affinity for stable ML workloads.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <h3>Sr. Solution Developer (Platform/DevOps) · Tata Technologies</h3>
+      <div class="meta">Sep 2022 – May 2025 · Pune, India</div>
+      <ul>
+        <li>Developed the Connected Vehicle Platform handling real-time TCU telemetry over MQTT and Kafka on 4 Kubernetes clusters.</li>
+        <li>Built event-driven microservices backed by Cassandra for scalable, fault-tolerant processing.</li>
+        <li>Automated CI/CD with Jenkins and ArgoCD, reducing deployment effort by 50%.</li>
+        <li>Managed AWS (EC2, VPC, NLB, S3) and enforced code quality with SonarQube + GitLab.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <h3>DevOps Engineer · SLK Automation</h3>
+      <div class="meta">Dec 2020 – Aug 2022 · Bangalore, India</div>
+      <ul>
+        <li>Automated CI/CD and Docker-based deployments, improving release frequency and consistency.</li>
+        <li>Supported Kubernetes workloads and AWS setup, monitoring and troubleshooting on Linux.</li>
+        <li>Reduced manual toil with Bash/Shell automation and proactive alerting.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2><small>Case studies</small>Projects &amp; Architecture</h2>
+  <p class="sub">Simplified, vendor-neutral views of platforms I designed and operated.</p>
+
+  <article class="card">
+    <h3>Bodhi Platform: AI/ML Microservices on AWS</h3>
+    <div class="meta" style="color:var(--muted)">Publicis Sapient · 2025 – Present</div>
+    <div class="cols">
+      <div><h4>Problem</h4><p>Host LLM gateway, vision, forecasting, video generation and orchestration services securely, with fast delivery and reliable scaling.</p></div>
+      <div><h4>What I built</h4><ul>
+        <li>Multi-AZ EKS platform behind API Gateway, VPC Link and NLB</li>
+        <li>GitLab runners on EKS, GitOps via ArgoCD + Image Updater</li>
+        <li>IRSA, RBAC and Secrets Manager for access control</li></ul></div>
+      <div><h4>Results</h4><ul>
+        <li>Fully automated, version-controlled deployments</li>
+        <li>40% faster incident resolution</li>
+        <li>Zero unplanned downtime on production issues</li></ul></div>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 900 470" role="img" aria-label="Bodhi platform AWS architecture diagram">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar"/></marker>
+          <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar2"/></marker>
+        </defs>
+        <!-- VPC zone -->
+        <rect class="zone" x="190" y="20" width="560" height="300" rx="14"/>
+        <text class="tz" x="204" y="40">AWS VPC · MULTI-AZ</text>
+        <rect class="zone" x="330" y="56" width="270" height="250" rx="12"/>
+        <text class="tz" x="344" y="76">AMAZON EKS</text>
+
+        <!-- edge -->
+        <rect class="nb" x="20" y="130" width="100" height="50" rx="10"/><text class="t" x="70" y="160" text-anchor="middle">Users / Apps</text>
+        <rect class="nb hl" x="210" y="88" width="100" height="50" rx="10"/><text class="t" x="260" y="118" text-anchor="middle">API Gateway</text>
+        <rect class="nb" x="210" y="170" width="100" height="50" rx="10"/><text class="t" x="260" y="192" text-anchor="middle">VPC Link</text><text class="ts" x="260" y="208" text-anchor="middle">→ NLB / ALB</text>
+        <rect class="nb" x="20" y="60" width="100" height="40" rx="10"/><text class="t" x="70" y="85" text-anchor="middle">Route 53</text>
+
+        <!-- namespaces -->
+        <rect class="nb hl" x="345" y="90" width="115" height="44" rx="8"/><text class="t" x="402" y="108" text-anchor="middle">LLM Gateway</text><text class="ts" x="402" y="124" text-anchor="middle">Helm · HPA</text>
+        <rect class="nb hl" x="470" y="90" width="115" height="44" rx="8"/><text class="t" x="527" y="108" text-anchor="middle">Vision</text><text class="ts" x="527" y="124" text-anchor="middle">Helm · HPA</text>
+        <rect class="nb hl" x="345" y="146" width="115" height="44" rx="8"/><text class="t" x="402" y="164" text-anchor="middle">Forecasting</text><text class="ts" x="402" y="180" text-anchor="middle">Helm · HPA</text>
+        <rect class="nb hl" x="470" y="146" width="115" height="44" rx="8"/><text class="t" x="527" y="164" text-anchor="middle">Video Gen</text><text class="ts" x="527" y="180" text-anchor="middle">Helm · HPA</text>
+        <rect class="nb hl" x="345" y="202" width="240" height="44" rx="8"/><text class="t" x="465" y="220" text-anchor="middle">Orchestrator</text><text class="ts" x="465" y="236" text-anchor="middle">routes requests across ML services</text>
+        <text class="ts" x="345" y="272">Taints/tolerations · node affinity</text>
+        <text class="ts" x="345" y="290">IRSA · RBAC · Secrets Manager</text>
+
+        <!-- data -->
+        <rect class="nb" x="780" y="60" width="100" height="40" rx="10"/><text class="t" x="830" y="85" text-anchor="middle">RDS Postgres</text>
+        <rect class="nb" x="780" y="112" width="100" height="40" rx="10"/><text class="t" x="830" y="137" text-anchor="middle">DocumentDB</text>
+        <rect class="nb" x="780" y="164" width="100" height="40" rx="10"/><text class="t" x="830" y="189" text-anchor="middle">Redis</text>
+        <rect class="nb" x="780" y="216" width="100" height="40" rx="10"/><text class="t" x="830" y="241" text-anchor="middle">S3</text>
+
+        <!-- flows -->
+        <path class="ln" d="M120 155 H165 V113 H208" marker-end="url(#a1)"/>
+        <path class="ln" d="M70 100 V130" marker-end="url(#a1)"/>
+        <path class="ln" d="M260 138 V168" marker-end="url(#a1)"/>
+        <path class="ln" d="M310 195 H343" marker-end="url(#a1)"/>
+        <path class="ln" d="M585 112 H640 V80 H778" marker-end="url(#a1)"/>
+        <path class="ln" d="M585 168 H660 V132 H778" marker-end="url(#a1)"/>
+        <path class="ln" d="M585 224 H680 V184 H778" marker-end="url(#a1)"/>
+        <path class="ln" d="M585 236 H700 V236 H778" marker-end="url(#a1)"/>
+
+        <!-- CI/CD row -->
+        <rect class="zone" x="20" y="345" width="860" height="105" rx="14"/>
+        <text class="tz" x="34" y="365">CI/CD &amp; GITOPS · OBSERVABILITY</text>
+        <rect class="nb ac" x="40" y="380" width="120" height="50" rx="10"/><text class="t" x="100" y="402" text-anchor="middle">GitLab CI</text><text class="ts" x="100" y="418" text-anchor="middle">runners on EKS · SAST</text>
+        <rect class="nb ac" x="200" y="380" width="110" height="50" rx="10"/><text class="t" x="255" y="402" text-anchor="middle">ECR / ACR</text><text class="ts" x="255" y="418" text-anchor="middle">Docker images</text>
+        <rect class="nb ac" x="350" y="380" width="130" height="50" rx="10"/><text class="t" x="415" y="402" text-anchor="middle">Argo Image Updater</text><text class="ts" x="415" y="418" text-anchor="middle">commits new tags</text>
+        <rect class="nb ac" x="520" y="380" width="110" height="50" rx="10"/><text class="t" x="575" y="402" text-anchor="middle">Git (Helm)</text><text class="ts" x="575" y="418" text-anchor="middle">source of truth</text>
+        <rect class="nb ac" x="670" y="380" width="90" height="50" rx="10"/><text class="t" x="715" y="402" text-anchor="middle">ArgoCD</text><text class="ts" x="715" y="418" text-anchor="middle">sync to EKS</text>
+        <rect class="nb" x="780" y="380" width="90" height="50" rx="10"/><text class="t" x="825" y="402" text-anchor="middle">Prom · Grafana</text><text class="ts" x="825" y="418" text-anchor="middle">+ CloudWatch</text>
+        <path class="ln2" d="M160 405 H198" marker-end="url(#a2)"/>
+        <path class="ln2" d="M310 405 H348" marker-end="url(#a2)"/>
+        <path class="ln2" d="M480 405 H518" marker-end="url(#a2)"/>
+        <path class="ln2" d="M630 405 H668" marker-end="url(#a2)"/>
+        <path class="ln2" d="M715 380 V340 H465 V248" marker-end="url(#a2)"/>
+      </svg>
+      <figcaption>Request path (solid) from Route 53 and API Gateway through VPC Link/NLB to ML microservices on EKS and the data tier. Delivery path (dashed) from GitLab CI to ECR/ACR, Image Updater, Git and ArgoCD.</figcaption>
+    </figure>
+    <div class="chips"><span class="chip">EKS</span><span class="chip">Helm</span><span class="chip">ArgoCD</span><span class="chip">GitLab CI</span><span class="chip">Terraform</span><span class="chip">IRSA</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">API Gateway</span><span class="chip">RDS</span><span class="chip">DocumentDB</span><span class="chip">Redis</span></div>
+  </article>
+
+  <article class="card">
+    <h3>Connected Vehicle Platform (CVP)</h3>
+    <div class="meta" style="color:var(--muted)">Tata Technologies · 2022 – 2025</div>
+    <div class="cols">
+      <div><h4>Problem</h4><p>Ingest high-frequency telemetry from vehicle TCUs in real time and distribute it reliably at scale.</p></div>
+      <div><h4>What I built</h4><ul>
+        <li>MQTT ingestion fanned out through Kafka</li>
+        <li>Event-driven microservices with Cassandra storage</li>
+        <li>Jenkins + ArgoCD delivery to 4 clusters</li></ul></div>
+      <div><h4>Results</h4><ul>
+        <li>50% less deployment effort</li>
+        <li>Consistent delivery across environments</li>
+        <li>Fault-tolerant under production load</li></ul></div>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 900 330" role="img" aria-label="Connected Vehicle Platform architecture diagram">
+        <defs>
+          <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar"/></marker>
+          <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar2"/></marker>
+        </defs>
+        <rect class="zone" x="300" y="20" width="440" height="200" rx="14"/>
+        <text class="tz" x="314" y="40">4 × KUBERNETES CLUSTERS (ON AWS)</text>
+
+        <rect class="nb" x="20" y="90" width="110" height="60" rx="10"/><text class="t" x="75" y="116" text-anchor="middle">Vehicle TCUs</text><text class="ts" x="75" y="134" text-anchor="middle">telemetry</text>
+        <rect class="nb hl" x="170" y="90" width="100" height="60" rx="10"/><text class="t" x="220" y="116" text-anchor="middle">MQTT</text><text class="ts" x="220" y="134" text-anchor="middle">via NLB</text>
+        <rect class="nb hl" x="320" y="90" width="110" height="60" rx="10"/><text class="t" x="375" y="116" text-anchor="middle">Kafka</text><text class="ts" x="375" y="134" text-anchor="middle">event streaming</text>
+        <rect class="nb hl" x="470" y="60" width="120" height="50" rx="10"/><text class="t" x="530" y="82" text-anchor="middle">Ingest services</text><text class="ts" x="530" y="98" text-anchor="middle">validate · enrich</text>
+        <rect class="nb hl" x="470" y="130" width="120" height="50" rx="10"/><text class="t" x="530" y="152" text-anchor="middle">Processing</text><text class="ts" x="530" y="168" text-anchor="middle">event-driven apps</text>
+        <rect class="nb" x="630" y="90" width="90" height="60" rx="10"/><text class="t" x="675" y="116" text-anchor="middle">Cassandra</text><text class="ts" x="675" y="134" text-anchor="middle">distributed</text>
+        <rect class="nb" x="780" y="90" width="100" height="60" rx="10"/><text class="t" x="830" y="116" text-anchor="middle">AWS</text><text class="ts" x="830" y="134" text-anchor="middle">EC2 · VPC · S3</text>
+
+        <path class="ln" d="M130 120 H168" marker-end="url(#b1)"/>
+        <path class="ln" d="M270 120 H318" marker-end="url(#b1)"/>
+        <path class="ln" d="M430 105 H450 V85 H468" marker-end="url(#b1)"/>
+        <path class="ln" d="M430 135 H450 V155 H468" marker-end="url(#b1)"/>
+        <path class="ln" d="M590 85 H610 V110 H628" marker-end="url(#b1)"/>
+        <path class="ln" d="M590 155 H610 V130 H628" marker-end="url(#b1)"/>
+        <path class="ln" d="M720 120 H778" marker-end="url(#b1)"/>
+
+        <rect class="zone" x="20" y="245" width="860" height="70" rx="14"/>
+        <text class="tz" x="34" y="262">CI/CD</text>
+        <rect class="nb ac" x="60" y="268" width="110" height="38" rx="8"/><text class="t" x="115" y="292" text-anchor="middle">GitLab + Sonar</text>
+        <rect class="nb ac" x="230" y="268" width="110" height="38" rx="8"/><text class="t" x="285" y="292" text-anchor="middle">Jenkins</text>
+        <rect class="nb ac" x="400" y="268" width="110" height="38" rx="8"/><text class="t" x="455" y="292" text-anchor="middle">Docker images</text>
+        <rect class="nb ac" x="570" y="268" width="110" height="38" rx="8"/><text class="t" x="625" y="292" text-anchor="middle">ArgoCD</text>
+        <path class="ln2" d="M170 287 H228" marker-end="url(#b2)"/>
+        <path class="ln2" d="M340 287 H398" marker-end="url(#b2)"/>
+        <path class="ln2" d="M510 287 H568" marker-end="url(#b2)"/>
+        <path class="ln2" d="M625 268 V230 H520 V222" marker-end="url(#b2)"/>
+      </svg>
+      <figcaption>Telemetry flows from vehicles over MQTT into Kafka, is processed by event-driven microservices across four clusters and persisted in Cassandra. Delivery is automated by Jenkins and ArgoCD.</figcaption>
+    </figure>
+    <div class="chips"><span class="chip">MQTT</span><span class="chip">Kafka</span><span class="chip">Cassandra</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span><span class="chip">ArgoCD</span><span class="chip">SonarQube</span><span class="chip">EC2 / VPC / NLB / S3</span></div>
+  </article>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2><small>Toolbox</small>Skills</h2>
+  <p class="sub">What I reach for to build and run production platforms.</p>
+  <div class="skills">
+    <div class="skill"><h4>Cloud (AWS)</h4><div class="chips"><span class="chip">EKS</span><span class="chip">EC2</span><span class="chip">VPC</span><span class="chip">S3</span><span class="chip">IAM</span><span class="chip">RDS</span><span class="chip">API Gateway</span><span class="chip">Route 53</span><span class="chip">DocumentDB</span><span class="chip">ECR</span><span class="chip">Secrets Manager</span></div></div>
+    <div class="skill"><h4>Containers &amp; Orchestration</h4><div class="chips"><span class="chip">Kubernetes</span><span class="chip">Helm</span><span class="chip">Docker</span><span class="chip">HPA</span><span class="chip">Affinity / Taints</span></div></div>
+    <div class="skill"><h4>IaC &amp; GitOps</h4><div class="chips"><span class="chip">Terraform</span><span class="chip">Modules</span><span class="chip">Workspaces</span><span class="chip">Remote backend</span><span class="chip">ArgoCD</span><span class="chip">Argo Image Updater</span></div></div>
+    <div class="skill"><h4>CI/CD &amp; Quality</h4><div class="chips"><span class="chip">GitLab CI</span><span class="chip">Jenkins</span><span class="chip">SonarQube</span><span class="chip">JFrog</span><span class="chip">SAST</span><span class="chip">DevSecOps</span></div></div>
+    <div class="skill"><h4>Observability</h4><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">CloudWatch</span></div></div>
+    <div class="skill"><h4>Networking, Data &amp; Security</h4><div class="chips"><span class="chip">NLB / ALB</span><span class="chip">Transit Gateway</span><span class="chip">Site-to-Site VPN</span><span class="chip">Kafka</span><span class="chip">Redis</span><span class="chip">IRSA</span><span class="chip">RBAC</span><span class="chip">Keycloak</span></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><small>Credentials</small>Certification &amp; Education</h2>
+  <div class="skills" style="margin-top:20px">
+    <div class="skill"><h4>AWS Certified Solutions Architect – Associate</h4><span style="color:var(--muted)">Amazon Web Services</span></div>
+    <div class="skill"><h4>B.Tech, Electronics &amp; Telecommunications</h4><span style="color:var(--muted)">Rajarambapu Institute of Technology, Sangli · 2016 – 2020</span></div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap contact">
+  <h2><small>Let's talk</small>Open to cloud, DevOps &amp; platform roles</h2>
+  <p class="sub">If you're building on AWS and Kubernetes and want reliable delivery, I'd love to hear from you.</p>
+  <div class="cta" style="justify-content:center">
+    <a class="btn primary" href="mailto:surajdole007@gmail.com">surajdole007@gmail.com</a>
+    <a class="btn" href="https://www.linkedin.com/in/suraj-dole-b40b8518b" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© <span id="yr"></span> Suraj Dole · Pune, India</div></footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+var root = document.documentElement;
+try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch(e){}
+document.getElementById('theme').addEventListener('click', function(){
+  var cur = root.getAttribute('data-theme') ||
+    (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e){}
+});
+</script>
+</body>
+</html>
