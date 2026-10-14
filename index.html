@@ -25,21 +25,6 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-/* animated background layers */
-#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-3;pointer-events:none}
-.blobs{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
-.blobs i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;animation:float 22s ease-in-out infinite}
-.blobs i:nth-child(1){width:520px;height:520px;background:var(--accent2);top:-140px;left:-120px}
-.blobs i:nth-child(2){width:460px;height:460px;background:var(--accent);bottom:-160px;right:-100px;animation-delay:-8s}
-.blobs i:nth-child(3){width:340px;height:340px;background:#ff5ca8;top:45%;left:55%;opacity:.18;animation-delay:-14s}
-:root[data-theme="light"] .blobs i{opacity:.22}
-@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-40px) scale(1.12)}}
-.grid{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.5;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 75%)}
-.glow{position:fixed;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;z-index:-1;pointer-events:none;
-  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);left:50%;top:30%}
 .stat,.card,.skill{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .25s,border-color .25s,box-shadow .25s}
 .stat:hover,.card:hover,.skill:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 40px -18px var(--accent)}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
@@ -51,7 +36,7 @@ html{scroll-behavior:smooth}
 @keyframes shine{to{background-position:200% 0}}
 .btn.primary{box-shadow:0 10px 30px -10px var(--accent2)}
 @media (prefers-reduced-motion:reduce){
-  .blobs i,.hero h1 span,.typed::after{animation:none}
+  .hero h1 span,.typed::after{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
 }
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
@@ -119,13 +104,22 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .ln2{stroke:var(--accent2);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
 .ar{fill:var(--accent)}
 .ar2{fill:var(--accent2)}
+
+/* 3D flow scenes */
+.scene{background:var(--panel2);border:1px solid var(--line);border-radius:12px;margin-top:14px;overflow:hidden}
+.scene-bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.scene-bar .grow{flex:1}
+.lg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--c)}
+.lg.l1{--c:var(--accent)}.lg.l2{--c:var(--accent2)}.lg.l3{--c:var(--ok)}.lg.l4{--c:#ff5ca8}
+.scene-bar button{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px}
+.scene-scroll{overflow-x:auto}
+.scene canvas{display:block;width:100%;min-width:720px;height:480px;touch-action:pan-y;cursor:grab}
+.scene canvas:active{cursor:grabbing}
+.scene-hint{padding:8px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
+.dl{font-size:13px;margin-top:10px;display:inline-block}
 </style>
 </head>
 <body>
-<canvas id="bg" aria-hidden="true"></canvas>
-<div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
-<div class="grid" aria-hidden="true"></div>
-<div class="glow" id="glow" aria-hidden="true"></div>
 <nav><div class="wrap">
   <a class="brand" href="#top">SD<span style="color:var(--accent)">.</span></a>
   <ul>
@@ -212,7 +206,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
         <li>40% faster incident resolution</li>
         <li>Zero unplanned downtime on production issues</li></ul></div>
     </div>
-    <figure class="diagram">
+    <div class="scene" data-scene="bodhi">
+      <div class="scene-bar"><span class="lg l1">Request path</span><span class="lg l2">Compute</span><span class="lg l3">Data</span><span class="lg l4">CI/CD delivery</span><span class="grow"></span><button data-act="play">Pause flow</button><button data-act="reset">Reset view</button></div>
+      <div class="scene-scroll"><canvas style="height:500px" aria-label="Interactive 3D architecture diagram with animated network flow"></canvas></div>
+      <div class="scene-hint">Drag to rotate and tilt. Glowing dots show traffic moving through the platform.</div>
+    </div>
+    <a class="dl" href="diagrams/bodhi-architecture.drawio" download>Download editable draw.io source (bodhi-architecture.drawio)</a>
+    <details style="margin-top:14px"><summary style="cursor:pointer;color:var(--muted)">Show flat 2D view</summary><figure class="diagram">
       <svg viewBox="0 0 900 470" role="img" aria-label="Bodhi platform AWS architecture diagram">
         <defs>
           <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar"/></marker>
@@ -271,7 +271,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
         <path class="ln2" d="M715 380 V340 H465 V248" marker-end="url(#a2)"/>
       </svg>
       <figcaption>Request path (solid) from Route 53 and API Gateway through VPC Link/NLB to ML microservices on EKS and the data tier. Delivery path (dashed) from GitLab CI to ECR/ACR, Image Updater, Git and ArgoCD.</figcaption>
-    </figure>
+    </figure></details>
     <div class="chips"><span class="chip">EKS</span><span class="chip">Helm</span><span class="chip">ArgoCD</span><span class="chip">GitLab CI</span><span class="chip">Terraform</span><span class="chip">IRSA</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">API Gateway</span><span class="chip">RDS</span><span class="chip">DocumentDB</span><span class="chip">Redis</span></div>
   </article>
 
@@ -289,7 +289,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
         <li>Consistent delivery across environments</li>
         <li>Fault-tolerant under production load</li></ul></div>
     </div>
-    <figure class="diagram">
+    <div class="scene" data-scene="cvp">
+      <div class="scene-bar"><span class="lg l1">Request path</span><span class="lg l2">Compute</span><span class="lg l3">Data</span><span class="lg l4">CI/CD delivery</span><span class="grow"></span><button data-act="play">Pause flow</button><button data-act="reset">Reset view</button></div>
+      <div class="scene-scroll"><canvas style="height:460px" aria-label="Interactive 3D architecture diagram with animated network flow"></canvas></div>
+      <div class="scene-hint">Drag to rotate and tilt. Glowing dots show traffic moving through the platform.</div>
+    </div>
+    <a class="dl" href="diagrams/cvp-architecture.drawio" download>Download editable draw.io source (cvp-architecture.drawio)</a>
+    <details style="margin-top:14px"><summary style="cursor:pointer;color:var(--muted)">Show flat 2D view</summary><figure class="diagram">
       <svg viewBox="0 0 900 330" role="img" aria-label="Connected Vehicle Platform architecture diagram">
         <defs>
           <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ar"/></marker>
@@ -326,7 +332,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
         <path class="ln2" d="M625 268 V230 H520 V222" marker-end="url(#b2)"/>
       </svg>
       <figcaption>Telemetry flows from vehicles over MQTT into Kafka, is processed by event-driven microservices across four clusters and persisted in Cassandra. Delivery is automated by Jenkins and ArgoCD.</figcaption>
-    </figure>
+    </figure></details>
     <div class="chips"><span class="chip">MQTT</span><span class="chip">Kafka</span><span class="chip">Cassandra</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span><span class="chip">ArgoCD</span><span class="chip">SonarQube</span><span class="chip">EC2 / VPC / NLB / S3</span></div>
   </article>
 </div></section>
@@ -395,53 +401,204 @@ var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   els.forEach(function(e){ io.observe(e); });
 })();
 
-// cursor glow
+// 3D flow scenes
 (function(){
-  var g = document.getElementById('glow');
-  if (reduce) return;
-  addEventListener('pointermove', function(e){ g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; });
+  function cssv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  var CFG = {
+    bodhi: {
+      cx: 3.9, cy: 3.5, span: 11.5, theta: -0.62, speed: 0.22,
+      slabs: [
+        {x0:3.0,y0:-0.2,x1:7.8,y1:5.2,label:'AWS VPC · MULTI-AZ',t:'edge'},
+        {x0:4.2,y0:0.1,x1:6.0,y1:4.9,label:'EKS',t:'compute'},
+        {x0:0.3,y0:5.9,x1:7.6,y1:7.3,label:'CI/CD · GITOPS',t:'ci'}
+      ],
+      nodes: [
+        {id:'users',x:0,y:2.5,l:'Users / Apps',t:'edge'},
+        {id:'r53',x:1.2,y:2.5,l:'Route 53',t:'edge'},
+        {id:'apigw',x:2.4,y:2.5,l:'API Gateway',t:'edge'},
+        {id:'nlb',x:3.6,y:2.5,l:'VPC Link / NLB',t:'edge'},
+        {id:'orch',x:4.8,y:2.5,l:'Orchestrator',t:'compute',h:0.6},
+        {id:'llm',x:5.4,y:0.7,l:'LLM Gateway',t:'compute'},
+        {id:'vis',x:5.4,y:1.9,l:'Vision',t:'compute'},
+        {id:'fc',x:5.4,y:3.1,l:'Forecasting',t:'compute'},
+        {id:'vid',x:5.4,y:4.3,l:'Video Gen',t:'compute'},
+        {id:'rds',x:7.0,y:0.7,l:'RDS Postgres',t:'data'},
+        {id:'doc',x:7.0,y:1.9,l:'DocumentDB',t:'data'},
+        {id:'red',x:7.0,y:3.1,l:'Redis',t:'data'},
+        {id:'s3',x:7.0,y:4.3,l:'S3',t:'data'},
+        {id:'gl',x:1.0,y:6.6,l:'GitLab CI',t:'ci'},
+        {id:'ecr',x:2.6,y:6.6,l:'ECR / ACR',t:'ci'},
+        {id:'upd',x:4.2,y:6.6,l:'Image Updater',t:'ci'},
+        {id:'argo',x:5.8,y:6.6,l:'ArgoCD',t:'ci'},
+        {id:'mon',x:7.0,y:6.6,l:'Prom / Grafana',t:'data'}
+      ],
+      edges: [
+        ['users','r53'],['r53','apigw'],['apigw','nlb'],['nlb','orch'],
+        ['orch','llm'],['orch','vis'],['orch','fc'],['orch','vid'],
+        ['llm','rds'],['vis','doc'],['fc','red'],['vid','s3'],
+        ['gl','ecr'],['ecr','upd'],['upd','argo'],['argo','orch','ci'],
+        ['orch','mon','data']
+      ]
+    },
+    cvp: {
+      cx: 3.4, cy: 3.5, span: 10, theta: -0.62, speed: 0.22,
+      slabs: [
+        {x0:2.2,y0:0.3,x1:6.8,y1:4.7,label:'4 x KUBERNETES CLUSTERS (AWS)',t:'compute'},
+        {x0:0.3,y0:5.3,x1:6.0,y1:6.7,label:'CI/CD',t:'ci'}
+      ],
+      nodes: [
+        {id:'tcu',x:0,y:2.5,l:'Vehicle TCUs',t:'edge'},
+        {id:'mqtt',x:1.2,y:2.5,l:'MQTT / NLB',t:'edge'},
+        {id:'kafka',x:2.8,y:2.5,l:'Kafka',t:'compute',h:0.6},
+        {id:'ing',x:4.4,y:1.2,l:'Ingest services',t:'compute'},
+        {id:'proc',x:4.4,y:3.8,l:'Event processing',t:'compute'},
+        {id:'cass',x:6.0,y:1.2,l:'Cassandra',t:'data'},
+        {id:'s3',x:6.0,y:3.8,l:'S3',t:'data'},
+        {id:'gl',x:1.0,y:6.0,l:'GitLab + Sonar',t:'ci'},
+        {id:'jen',x:2.4,y:6.0,l:'Jenkins',t:'ci'},
+        {id:'dock',x:3.8,y:6.0,l:'Docker images',t:'ci'},
+        {id:'argo',x:5.2,y:6.0,l:'ArgoCD',t:'ci'}
+      ],
+      edges: [
+        ['tcu','mqtt'],['mqtt','kafka'],['kafka','ing'],['kafka','proc'],
+        ['ing','cass'],['proc','cass'],['proc','s3'],
+        ['gl','jen'],['jen','dock'],['dock','argo'],['argo','ing','ci'],['argo','proc','ci']
+      ]
+    }
+  };
+
+  function Scene(el, cfg){
+    var cv = el.querySelector('canvas'), ctx = cv.getContext('2d');
+    var W = 0, H = 0, theta = cfg.theta, tilt = 0.5, touched = false;
+    var paused = reduce, flowT = 0, lastTs = 0, visible = false, drag = null, colors = {};
+    var byId = {};
+    cfg.nodes.forEach(function(n){ byId[n.id] = n; });
+    var btnPlay = el.querySelector('[data-act=play]'), btnReset = el.querySelector('[data-act=reset]');
+    btnPlay.textContent = paused ? 'Play flow' : 'Pause flow';
+
+    function readColors(){
+      colors = {edge:cssv('--accent'), compute:cssv('--accent2'), data:cssv('--ok'), ci:'#ff5ca8',
+                text:cssv('--text'), muted:cssv('--muted'), bg:cssv('--bg')};
+    }
+    function resize(){
+      var dpr = Math.min(devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+    function P(x, y, z){
+      var dx = x - cfg.cx, dy = y - cfg.cy, c = Math.cos(theta), s = Math.sin(theta);
+      var X = dx * c - dy * s, Y = dx * s + dy * c, S = W / cfg.span;
+      return {x: W / 2 + X * S, y: H * 0.52 + Y * S * tilt - z * S * 0.62, d: Y};
+    }
+    function poly(pts){
+      ctx.beginPath();
+      pts.forEach(function(p, i){ i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
+      ctx.closePath();
+    }
+    function slab(s){
+      var c = [P(s.x0,s.y0,0), P(s.x1,s.y0,0), P(s.x1,s.y1,0), P(s.x0,s.y1,0)];
+      var col = colors[s.t];
+      poly(c); ctx.globalAlpha = .08; ctx.fillStyle = col; ctx.fill();
+      ctx.globalAlpha = .55; ctx.strokeStyle = col; ctx.lineWidth = 1.2; ctx.setLineDash([6,5]); ctx.stroke(); ctx.setLineDash([]);
+      var a = P(s.x0, s.y1, 0);
+      ctx.globalAlpha = 1; ctx.fillStyle = col; ctx.font = '600 11px ui-monospace,Menlo,monospace';
+      ctx.textAlign = 'left'; ctx.fillText(s.label, a.x + 6, a.y - 8);
+    }
+    function box(n){
+      var r = 0.26, h = n.h || 0.42, col = colors[n.t];
+      var base = [[-r,-r],[r,-r],[r,r],[-r,r]].map(function(o){ return [n.x + o[0], n.y + o[1]]; });
+      var top = base.map(function(p){ return P(p[0], p[1], h); });
+      var bot = base.map(function(p){ return P(p[0], p[1], 0); });
+      var sides = [];
+      for (var i = 0; i < 4; i++){
+        var j = (i + 1) % 4;
+        sides.push({q:[bot[i], bot[j], top[j], top[i]], d:(bot[i].d + bot[j].d) / 2});
+      }
+      sides.sort(function(a, b){ return a.d - b.d; });
+      ctx.lineWidth = 1; ctx.strokeStyle = col; ctx.fillStyle = col;
+      [[sides[2], .42],[sides[3], .26]].forEach(function(s){
+        poly(s.q); ctx.globalAlpha = s[1]; ctx.fill(); ctx.globalAlpha = .9; ctx.stroke();
+      });
+      poly(top); ctx.globalAlpha = .85; ctx.fill(); ctx.globalAlpha = 1; ctx.stroke();
+      var c = P(n.x, n.y, h);
+      ctx.font = '600 12px system-ui,sans-serif'; ctx.textAlign = 'center';
+      ctx.lineWidth = 4; ctx.strokeStyle = colors.bg; ctx.strokeText(n.l, c.x, c.y - 12);
+      ctx.fillStyle = colors.text; ctx.fillText(n.l, c.x, c.y - 12);
+    }
+    function mid(n){ return (n.h || 0.42) / 2; }
+    function edge(e, idx){
+      var a = byId[e[0]], b = byId[e[1]], col = colors[e[2] || b.t];
+      var pa = P(a.x, a.y, mid(a)), pb = P(b.x, b.y, mid(b));
+      ctx.globalAlpha = .4; ctx.strokeStyle = col; ctx.lineWidth = 1.6;
+      if ((e[2] || b.t) === 'ci') ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); ctx.setLineDash([]);
+      for (var k = 0; k < 3; k++){
+        var u = (flowT * cfg.speed + k / 3 + idx * 0.13) % 1;
+        var q = P(a.x + (b.x - a.x) * u, a.y + (b.y - a.y) * u, mid(a) + (mid(b) - mid(a)) * u);
+        ctx.globalAlpha = 1; ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = 10;
+        ctx.beginPath(); ctx.arc(q.x, q.y, 3.4, 0, 6.2832); ctx.fill(); ctx.shadowBlur = 0;
+      }
+    }
+    function draw(){
+      if (!W) return;
+      ctx.clearRect(0, 0, W, H);
+      cfg.slabs.forEach(slab);
+      cfg.edges.forEach(edge);
+      cfg.nodes.map(function(n){ return {n:n, d:P(n.x, n.y, 0).d}; })
+        .sort(function(a, b){ return a.d - b.d; })
+        .forEach(function(o){ box(o.n); });
+      ctx.globalAlpha = 1;
+    }
+    function loop(ts){
+      if (!visible) { lastTs = 0; return; }
+      var dt = lastTs ? (ts - lastTs) / 1000 : 0; lastTs = ts;
+      if (!paused){
+        flowT += dt;
+        if (!touched) theta = cfg.theta + Math.sin(flowT * 0.3) * 0.22;
+        draw();
+      }
+      requestAnimationFrame(loop);
+    }
+    function wake(){ if (visible) { lastTs = 0; requestAnimationFrame(loop); } }
+
+    cv.addEventListener('pointerdown', function(e){
+      drag = {x: e.clientX, y: e.clientY}; touched = true; cv.setPointerCapture(e.pointerId);
+    });
+    cv.addEventListener('pointermove', function(e){
+      if (!drag) return;
+      theta += (e.clientX - drag.x) * 0.01;
+      tilt = Math.max(0.28, Math.min(0.95, tilt + (e.clientY - drag.y) * 0.004));
+      drag = {x: e.clientX, y: e.clientY};
+      draw();
+    });
+    function end(){ drag = null; }
+    cv.addEventListener('pointerup', end);
+    cv.addEventListener('pointercancel', end);
+    btnPlay.addEventListener('click', function(){
+      paused = !paused; btnPlay.textContent = paused ? 'Play flow' : 'Pause flow'; wake();
+    });
+    btnReset.addEventListener('click', function(){
+      theta = cfg.theta; tilt = 0.5; touched = false; draw();
+    });
+    new MutationObserver(function(){ readColors(); draw(); })
+      .observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+    addEventListener('resize', resize);
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        visible = es[0].isIntersecting; if (visible) wake();
+      }).observe(el);
+    } else { visible = true; wake(); }
+    readColors(); resize();
+  }
+
+  document.querySelectorAll('.scene').forEach(function(el){
+    var cfg = CFG[el.getAttribute('data-scene')];
+    if (cfg) Scene(el, cfg);
+  });
 })();
 
-// particle network
-(function(){
-  var cv = document.getElementById('bg'), ctx = cv.getContext('2d');
-  var W, H, pts = [], mouse = {x:-999, y:-999};
-  function size(){
-    var d = Math.min(devicePixelRatio || 1, 2);
-    W = innerWidth; H = innerHeight;
-    cv.width = W * d; cv.height = H * d;
-    ctx.setTransform(d,0,0,d,0,0);
-    var n = Math.round(Math.min(90, W * H / 18000));
-    pts = [];
-    for (var i = 0; i < n; i++) pts.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35});
-  }
-  function color(){ return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#4cc9f0'; }
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    var col = color();
-    ctx.fillStyle = col; ctx.strokeStyle = col;
-    for (var i = 0; i < pts.length; i++){
-      var p = pts[i];
-      if (!reduce){
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-      }
-      ctx.globalAlpha = .7;
-      ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 6.283); ctx.fill();
-      for (var j = i + 1; j < pts.length; j++){
-        var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d2 = dx*dx + dy*dy;
-        if (d2 < 14000){ ctx.globalAlpha = (1 - d2/14000) * .35; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
-      }
-      var mx = p.x - mouse.x, my = p.y - mouse.y, md = mx*mx + my*my;
-      if (md < 20000){ ctx.globalAlpha = (1 - md/20000) * .6; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke(); }
-    }
-    if (!reduce) requestAnimationFrame(frame);
-  }
-  addEventListener('pointermove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; });
-  addEventListener('resize', size);
-  size(); frame();
-})();
 var root = document.documentElement;
 try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch(e){}
 document.getElementById('theme').addEventListener('click', function(){
