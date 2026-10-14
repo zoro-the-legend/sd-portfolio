@@ -7,24 +7,53 @@
 <meta name="description" content="AWS Certified Solutions Architect with 5+ years in Kubernetes, Terraform, GitOps and AI/ML platform infrastructure.">
 <style>
 :root{
-  --bg:#0b1020; --panel:#121933; --panel2:#171f3f; --text:#e8ecf8; --muted:#9aa5c7;
+  --bg:#070b18; --panel:rgba(18,25,51,.62); --panel2:rgba(23,31,63,.7); --text:#e8ecf8; --muted:#9aa5c7;
   --line:#26305a; --accent:#4cc9f0; --accent2:#7c5cff; --ok:#3ddc97;
   --svg-box:#171f3f; --svg-stroke:#4a5aa0;
 }
 :root[data-theme="light"]{
-  --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef1fa; --text:#12172b; --muted:#566086;
+  --bg:#f3f5fc; --panel:rgba(255,255,255,.72); --panel2:rgba(238,241,250,.8); --text:#12172b; --muted:#566086;
   --line:#dde2f2; --accent:#0b7bc1; --accent2:#5b3fe0; --ok:#12915f;
   --svg-box:#eef1fa; --svg-stroke:#8b97c9;
 }
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
-    --bg:#f6f7fb; --panel:#ffffff; --panel2:#eef1fa; --text:#12172b; --muted:#566086;
+    --bg:#f3f5fc; --panel:rgba(255,255,255,.72); --panel2:rgba(238,241,250,.8); --text:#12172b; --muted:#566086;
     --line:#dde2f2; --accent:#0b7bc1; --accent2:#5b3fe0; --ok:#12915f;
     --svg-box:#eef1fa; --svg-stroke:#8b97c9;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+/* animated background layers */
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-3;pointer-events:none}
+.blobs{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.blobs i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;animation:float 22s ease-in-out infinite}
+.blobs i:nth-child(1){width:520px;height:520px;background:var(--accent2);top:-140px;left:-120px}
+.blobs i:nth-child(2){width:460px;height:460px;background:var(--accent);bottom:-160px;right:-100px;animation-delay:-8s}
+.blobs i:nth-child(3){width:340px;height:340px;background:#ff5ca8;top:45%;left:55%;opacity:.18;animation-delay:-14s}
+:root[data-theme="light"] .blobs i{opacity:.22}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-40px) scale(1.12)}}
+.grid{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 75%)}
+.glow{position:fixed;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);left:50%;top:30%}
+.stat,.card,.skill{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .25s,border-color .25s,box-shadow .25s}
+.stat:hover,.card:hover,.skill:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 40px -18px var(--accent)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.typed{font:600 clamp(15px,2.4vw,20px) ui-monospace,Menlo,monospace;color:var(--accent);margin:0 0 6px;min-height:1.6em}
+.typed::after{content:"▍";margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero h1 span{background-size:200% 100%;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+.btn.primary{box-shadow:0 10px 30px -10px var(--accent2)}
+@media (prefers-reduced-motion:reduce){
+  .blobs i,.hero h1 span,.typed::after{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -93,6 +122,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </style>
 </head>
 <body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
 <nav><div class="wrap">
   <a class="brand" href="#top">SD<span style="color:var(--accent)">.</span></a>
   <ul>
@@ -107,7 +140,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <main id="top">
 <header class="hero"><div class="wrap">
   <span class="tag">AWS Certified Solutions Architect · Pune, India</span>
-  <h1>Hi, I'm Suraj Dole.<br><span>I build cloud platforms that don't fall over.</span></h1>
+  <p class="typed" id="typed" style="margin-top:22px"></p>
+  <h1 style="margin-top:6px">Hi, I'm Suraj Dole.<br><span>I build cloud platforms that don't fall over.</span></h1>
   <p class="lead">Cloud &amp; DevOps engineer with 5+ years designing highly available AWS infrastructure, Kubernetes microservices, Terraform IaC and GitOps delivery, most recently for AI/ML platforms.</p>
   <div class="cta">
     <a class="btn primary" href="#contact">Get in touch</a>
@@ -332,6 +366,82 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
+var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// typing effect
+(function(){
+  var el = document.getElementById('typed');
+  var words = ['$ kubectl apply -f platform.yaml','$ terraform apply -auto-approve','$ argocd app sync production','$ aws eks update-kubeconfig'];
+  if (reduce) { el.textContent = words[0]; return; }
+  var w = 0, c = 0, del = false;
+  (function tick(){
+    var s = words[w];
+    el.textContent = s.slice(0, c);
+    if (!del && c === s.length) { del = true; return setTimeout(tick, 1400); }
+    if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+    c += del ? -1 : 1;
+    setTimeout(tick, del ? 28 : 55);
+  })();
+})();
+
+// scroll reveal
+(function(){
+  var els = document.querySelectorAll('.stat,.job,.card,.skill,section h2,.sub');
+  els.forEach(function(e){ e.classList.add('reveal'); });
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+  }, {threshold: .12});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+// cursor glow
+(function(){
+  var g = document.getElementById('glow');
+  if (reduce) return;
+  addEventListener('pointermove', function(e){ g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; });
+})();
+
+// particle network
+(function(){
+  var cv = document.getElementById('bg'), ctx = cv.getContext('2d');
+  var W, H, pts = [], mouse = {x:-999, y:-999};
+  function size(){
+    var d = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = W * d; cv.height = H * d;
+    ctx.setTransform(d,0,0,d,0,0);
+    var n = Math.round(Math.min(90, W * H / 18000));
+    pts = [];
+    for (var i = 0; i < n; i++) pts.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35});
+  }
+  function color(){ return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#4cc9f0'; }
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    var col = color();
+    ctx.fillStyle = col; ctx.strokeStyle = col;
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      if (!reduce){
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      }
+      ctx.globalAlpha = .7;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 6.283); ctx.fill();
+      for (var j = i + 1; j < pts.length; j++){
+        var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d2 = dx*dx + dy*dy;
+        if (d2 < 14000){ ctx.globalAlpha = (1 - d2/14000) * .35; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
+      }
+      var mx = p.x - mouse.x, my = p.y - mouse.y, md = mx*mx + my*my;
+      if (md < 20000){ ctx.globalAlpha = (1 - md/20000) * .6; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke(); }
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  addEventListener('pointermove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; });
+  addEventListener('resize', size);
+  size(); frame();
+})();
 var root = document.documentElement;
 try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch(e){}
 document.getElementById('theme').addEventListener('click', function(){
