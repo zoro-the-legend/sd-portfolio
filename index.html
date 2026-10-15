@@ -39,7 +39,7 @@ html{scroll-behavior:smooth}
   .hero h1 span,.typed::after{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
 }
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
@@ -106,12 +106,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .ar2{fill:var(--accent2)}
 
 /* AWS-style architecture diagrams */
-.awsd{margin:14px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#07080f}
+.awsd{width:min(1480px,calc(100vw - 32px));position:relative;left:50%;transform:translateX(-50%);margin:14px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#07080f}
 .awsd-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;font-size:13px;color:#a9b1d6;border-bottom:1px solid #1d2238}
 .awsd-bar .grow{flex:1}
 .awsd-bar button{background:#141830;border:1px solid #2a3150;color:#e8ecf8;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px}
 .awsd-scroll{overflow-x:auto}
-.awsvg{display:block;width:100%;min-width:980px;height:auto}
+.awsvg{display:block;width:100%;height:auto}
+@media (max-width:760px){.awsvg{min-width:900px}}
 .awsd figcaption{padding:10px 14px;font-size:13px;color:#a9b1d6;border-top:1px solid #1d2238}
 .awsvg .dt{fill:#fff;font:800 26px system-ui,-apple-system,sans-serif}
 .awsvg .dg{fill:#fff;font:600 14px system-ui,sans-serif}
