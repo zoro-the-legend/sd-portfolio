@@ -185,6 +185,44 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
 .ccard b{font-weight:600;word-break:break-word}
 .foot{margin-top:46px;padding-top:18px;border-top:1px solid var(--border);font:12.5px var(--mono);color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
+
+/* about: reference-style sections */
+.seg.solid{position:static;grid-template-columns:repeat(3,1fr);margin:40px 0 30px}
+.seg.solid a.on{background:var(--accent);color:#fff;box-shadow:0 4px 12px -4px var(--accent)}
+.ab{scroll-margin-top:24px;margin-bottom:38px}
+.ab-h{margin:0;padding-bottom:14px;border-bottom:1px solid var(--border);font:600 20px var(--sans);color:var(--heading)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--border);margin-top:18px;border-top:1px solid var(--border)}
+.stat{padding:22px 18px;color:var(--heading);transition:background .2s}
+.stat + .stat{border-left:1px solid var(--border)}
+.stat:hover{background:var(--tint-2);color:var(--heading)}
+.stat b{display:block;font:500 34px/1.1 var(--sans);letter-spacing:-.5px}
+.stat:hover b{color:var(--accent)}
+.stat span{display:block;margin-top:10px;font:500 11px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--muted)}
+.scope{margin-top:18px;border-top:1px solid var(--border)}
+.scope article{display:grid;grid-template-columns:44px minmax(0,1fr) 36px;gap:18px;padding:22px 10px;border-bottom:1px solid var(--border)}
+.scope .idx{font:600 14px var(--mono);color:var(--heading);padding-top:3px}
+.scope h3{margin:0 0 6px;font:600 17px var(--sans);color:var(--heading);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.scope h3 small{font:500 10.5px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--accent)}
+.scope p{margin:0;font-size:14px;color:var(--text);max-width:620px}
+.scope .sq{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:var(--accent);color:#fff;box-shadow:0 6px 14px -6px var(--accent)}
+.scope .sq svg{width:19px;height:19px}
+.cos{display:flex;flex-wrap:wrap;margin-top:18px}
+.co{display:flex;align-items:center;gap:10px;padding:14px 24px;font:500 13.5px var(--mono);color:var(--heading)}
+.co + .co{border-left:1px solid var(--border)}
+.co .mono{display:grid;place-items:center;min-width:34px;height:26px;padding:0 6px;border:1.5px solid var(--heading);border-radius:6px;font:700 11px var(--sans);letter-spacing:.5px}
+.foot{justify-content:center;gap:16px}
+.deco2{position:fixed;right:0;bottom:0;width:300px;height:420px;pointer-events:none;z-index:0}
+@media (max-width:1100px){.deco2{display:none}}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--border)}
+  .scope article{grid-template-columns:30px minmax(0,1fr);padding:18px 4px}
+  .scope .sq{display:none}
+  .co{padding:10px 16px 10px 0}
+  .co + .co{border-left:0}
+}
+
 /* ---------- AWS-style architecture diagrams ---------- */
 .awsd{margin:14px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#07080f}
 .awsd-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;font-size:13px;color:#a9b1d6;border-bottom:1px solid #1d2238}
@@ -241,7 +279,7 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
   .title{font-size:30px}
   .about,.entry{grid-template-columns:minmax(0,1fr);gap:10px}
   .about{gap:6px}
-  .facts dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+  .facts dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;margin-bottom:22px}
   .doing,.groups,.cards{grid-template-columns:minmax(0,1fr)}
   .rail{flex-direction:row;flex-wrap:wrap;gap:4px 12px}
   .seg a{font-size:10.5px;letter-spacing:.4px;padding:8px 2px}
@@ -267,6 +305,16 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
   <polygon points="80,235 105,220 105,250" fill="#1a40d8" opacity=".45"/>
 </svg>
 
+<svg class="deco2" viewBox="0 0 300 420" aria-hidden="true">
+  <polygon points="300,60 240,90 300,120" fill="#5b8def" opacity=".45"/>
+  <polygon points="210,20 225,12 225,28" fill="#5b8def" opacity=".5"/>
+  <polygon points="300,150 230,185 230,265 300,230" fill="#5b8def" opacity=".35"/>
+  <polygon points="230,185 160,220 160,300 230,265" fill="#e2733f" opacity=".45"/>
+  <polygon points="160,300 230,265 300,300 230,335" fill="#f4a780" opacity=".5"/>
+  <polygon points="230,335 300,300 300,380 230,420" fill="#1a40d8" opacity=".3"/>
+  <polygon points="90,340 160,300 160,380 90,420" fill="#e2733f" opacity=".35"/>
+  <polygon points="160,380 230,335 230,420 160,420" fill="#5b8def" opacity=".4"/>
+</svg>
 <div class="shell">
   <header class="topcard box">
     <div class="who">
@@ -285,7 +333,7 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
     <div class="vsep"></div>
     <div class="grow"></div>
     <div class="acts">
-      <a class="btn" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Hire me</a>
+      <a class="btn" href="Suraj_Dole_Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg> Download CV</a>
       <a class="mailto" href="mailto:surajdole007@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> surajdole007@gmail.com</a>
       <div class="socials">
         <a href="https://www.linkedin.com/in/suraj-dole-b40b8518b" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
@@ -316,10 +364,10 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
         <div class="facts">
           <p class="eyebrow">Profile</p>
           <dl>
-            <dt>Role</dt><dd>Cloud · DevOps · Platform</dd>
-            <dt>Location</dt><dd>Pune, India</dd>
-            <dt>Experience</dt><dd>5+ years</dd>
-            <dt>Certified</dt><dd>AWS Solutions Architect</dd>
+            <div><dt>Role</dt><dd>Cloud · DevOps · Platform</dd></div>
+            <div><dt>Location</dt><dd>Pune, India</dd></div>
+            <div><dt>Experience</dt><dd>5+ years</dd></div>
+            <div><dt>Certified</dt><dd>AWS Solutions Architect</dd></div>
           </dl>
         </div>
         <div>
@@ -331,22 +379,38 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
         </div>
       </div>
 
-      <div class="kpis">
-        <div class="kpi"><b>5+ yrs</b><span>DevOps &amp; cloud infrastructure</span></div>
-        <div class="kpi"><b>−40%</b><span>incident resolution time via observability</span></div>
-        <div class="kpi"><b>−50%</b><span>deployment effort via Jenkins + Argo CD</span></div>
-        <div class="kpi"><b>4</b><span>Kubernetes clusters running one platform</span></div>
-      </div>
+      <nav class="seg solid" aria-label="About sections">
+        <a href="#stats" class="on" data-jump>Stats</a><a href="#scope" data-jump>Scope</a><a href="#companies" data-jump>Companies</a>
+      </nav>
 
-      <div class="sec-gap">
-        <p class="eyebrow">What I do</p>
-        <div class="doing">
-          <article><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H8a5 5 0 1 1 1-9.9A6 6 0 0 1 20.5 11 4 4 0 0 1 17.5 19z"/></svg></div><div><h3>AWS cloud architecture</h3><p>Multi-AZ VPC, EKS, ALB/NLB, API Gateway and Route 53 designs built for high availability and fault tolerance.</p></div></article>
-          <article><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3.5 6.5v11L12 22l8.5-4.5v-11z"/><circle cx="12" cy="12" r="3"/><path d="M12 6v3M12 15v3M6.8 9l2.6 1.5M14.6 13.5 17.2 15M6.8 15l2.6-1.5M14.6 10.5 17.2 9"/></svg></div><div><h3>Kubernetes platforms</h3><p>Helm-packaged microservices, HPA, requests/limits, taints and affinity tuned for stable ML workloads.</p></div></article>
-          <article><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 3-3 4-9.5 5"/></svg></div><div><h3>IaC &amp; GitOps delivery</h3><p>Terraform modules and remote state, GitLab CI and Jenkins pipelines, Argo CD and Image Updater for promotion.</p></div></article>
-          <article><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div><div><h3>Observability &amp; DevSecOps</h3><p>Prometheus, Grafana and CloudWatch alerting, SonarQube and Trivy gates, IRSA, RBAC and Secrets Manager.</p></div></article>
+      <section class="ab" id="stats">
+        <h2 class="ab-h">Track Record</h2>
+        <div class="stats">
+          <a class="stat" href="#experience"><b>5+</b><span>Years experience</span></a>
+          <a class="stat" href="#projects"><b>40%</b><span>Faster incident fix</span></a>
+          <a class="stat" href="#projects"><b>50%</b><span>Less deploy effort</span></a>
+          <a class="stat" href="#skills"><b>40+</b><span>Technologies</span></a>
         </div>
-      </div>
+      </section>
+
+      <section class="ab" id="scope">
+        <h2 class="ab-h">Areas of Work</h2>
+        <div class="scope">
+          <article><span class="idx">01</span><div><h3>Cloud Architecture <small>AWS</small></h3><p>Designing multi-AZ AWS platforms with VPC, EKS, ALB/NLB, API Gateway and Route 53, built for high availability, fault tolerance and cost efficiency.</p></div><span class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H8a5 5 0 1 1 1-9.9A6 6 0 0 1 20.5 11 4 4 0 0 1 17.5 19z"/></svg></span></article>
+          <article><span class="idx">02</span><div><h3>Kubernetes Platforms <small>Containers</small></h3><p>Running Helm-packaged microservices and AI/ML workloads on EKS, tuned with HPA, requests/limits, taints, tolerations and node affinity.</p></div><span class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3.5 6.5v11L12 22l8.5-4.5v-11z"/><circle cx="12" cy="12" r="3"/><path d="M12 6v3M12 15v3M6.8 9l2.6 1.5M14.6 13.5 17.2 15M6.8 15l2.6-1.5M14.6 10.5 17.2 9"/></svg></span></article>
+          <article><span class="idx">03</span><div><h3>IaC &amp; GitOps <small>Automation</small></h3><p>Provisioning with Terraform modules, workspaces and remote state, and shipping through GitLab CI, Jenkins and Argo CD with Image Updater across dev, demo and prod.</p></div><span class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 3-3 4-9.5 5"/></svg></span></article>
+          <article><span class="idx">04</span><div><h3>DevSecOps &amp; Observability <small>Reliability</small></h3><p>SAST, SonarQube and Trivy gates in CI, IRSA, RBAC and Secrets Manager for least privilege, and Prometheus, Grafana and CloudWatch alerting that cut incident resolution by 40%.</p></div><span class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span></article>
+        </div>
+      </section>
+
+      <section class="ab" id="companies">
+        <h2 class="ab-h">Companies</h2>
+        <div class="cos">
+          <div class="co"><span class="mono">PS</span><span>Publicis Sapient</span></div>
+          <div class="co"><span class="mono">TT</span><span>Tata Technologies</span></div>
+          <div class="co"><span class="mono">SLK</span><span>SLK Automation</span></div>
+        </div>
+      </section>
     </section>
 
     <!-- ================= RESUME ================= -->
@@ -504,7 +568,7 @@ a.ccard:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--
       </div>
     </section>
 
-    <footer class="foot"><span>© <span id="yr"></span> Suraj Dole</span><span>Pune, India</span></footer>
+    <footer class="foot"><span>© <span id="yr"></span> Suraj Dole</span><a href="#contact">Contact</a></footer>
   </main>
 </div>
 
@@ -549,17 +613,26 @@ function route(){
 addEventListener('hashchange', route);
 route();
 
+// in-page jumps inside a view (don't change route)
+document.querySelectorAll('[data-jump]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  });
+});
 // resume segmented control follows scroll
 (function(){
-  var links = document.querySelectorAll('.seg a');
   if (!('IntersectionObserver' in window)) return;
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if (!e.isIntersecting) return;
-      links.forEach(function(l){ l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id); });
-    });
-  }, {rootMargin: '-30% 0px -60% 0px'});
-  document.querySelectorAll('.cv').forEach(function(s){ io.observe(s); });
+  document.querySelectorAll('.seg').forEach(function(seg){
+    var links = seg.querySelectorAll('a');
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        links.forEach(function(l){ l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, {rootMargin: '-30% 0px -60% 0px'});
+    links.forEach(function(l){ var s = document.querySelector(l.getAttribute('href')); if (s) io.observe(s); });
+  });
 })();
 
 // diagram flow controls
